@@ -71,12 +71,26 @@ app.get('/new', (c) => {
             <label class="form-label">メモ</label>
             <textarea name="memo" class="form-control"></textarea>
           </div>
-          <div class="mb-3">
+<div class="mb-3">
             <label class="form-label">
               候補日程 (改行して複数入力してください)
             </label>
-            <textarea name="candidates" class="form-control"></textarea>
+            <div class="input-group mb-2">
+              <input type="date" id="candidateDatePicker" class="form-control" />
+              <button type="button" id="addCandidateButton" class="btn btn-outline-secondary">追加</button>
+            </div>
+            <textarea name="candidates" id="candidatesTextarea" class="form-control"></textarea>
           </div>
+          <script>
+            document.getElementById('addCandidateButton').addEventListener('click', () => {
+              const datePicker = document.getElementById('candidateDatePicker');
+              const textarea = document.getElementById('candidatesTextarea');
+              if (datePicker.value) {
+                textarea.value += (textarea.value ? '\n' : '') + datePicker.value;
+                datePicker.value = '';
+              }
+            });
+          </script>
           <button class="btn btn-primary" type="submit">予定をつくる</button>
         </form>
       `,
