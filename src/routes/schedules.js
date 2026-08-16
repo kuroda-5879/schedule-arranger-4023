@@ -86,7 +86,7 @@ app.get('/new', (c) => {
               const datePicker = document.getElementById('candidateDatePicker');
               const textarea = document.getElementById('candidatesTextarea');
               if (datePicker.value) {
-                textarea.value += (textarea.value ? '\n' : '') + datePicker.value;
+                textarea.value += (textarea.value ? '\\n' : '') + datePicker.value;
                 datePicker.value = '';
               }
             });
