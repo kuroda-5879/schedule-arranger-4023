@@ -328,8 +328,23 @@ app.get('/:scheduleId/edit', scheduleIdValidator, async (c) => {
                   html`<li class="list-group-item">${candidate.candidateName}</li>`,
               )}
             </ul>
-            <p>候補日程の追加 (改行して複数入力してください)</p>
-            <textarea name="candidates" class="form-control"></textarea>
+<p>候補日程の追加 (改行して複数入力してください)</p>
+            <div class="input-group mb-2">
+              <input type="date" id="candidateDatePicker" class="form-control" />
+              <button type="button" id="addCandidateButton" class="btn btn-outline-secondary">追加</button>
+            </div>
+            <textarea name="candidates" id="candidatesTextarea" class="form-control"></textarea>
+          </div>
+          <script>
+            document.getElementById('addCandidateButton').addEventListener('click', () => {
+              const datePicker = document.getElementById('candidateDatePicker');
+              const textarea = document.getElementById('candidatesTextarea');
+              if (datePicker.value) {
+                textarea.value += (textarea.value ? '\\n' : '') + datePicker.value;
+                datePicker.value = '';
+              }
+            });
+          </script>
           </div>
           <button type="submit" class="btn btn-primary">
             以上の内容で予定を編集する <i class="bi bi-pencil"></i>
